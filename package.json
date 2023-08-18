@@ -2,6 +2,9 @@
   "name": "vue3-antd4-admin",
   "version": "0.0.0",
   "private": true,
+  "author": "Rain9",
+  "type": "module",
+  "description": "vue3-antd4-admin open source management system",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -18,12 +21,16 @@
   "dependencies": {
     "@vueuse/core": "^10.3.0",
     "ant-design-vue": "^4.0.0",
+    "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
+    "pinia-plugin-persistedstate": "^3.2.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
     "@types/jsdom": "^21.1.1",
@@ -39,6 +46,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-vue": "^9.15.1",
     "jsdom": "^22.1.0",
+    "less": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
     "start-server-and-test": "^2.0.0",

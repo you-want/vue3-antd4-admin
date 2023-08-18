@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, ConfigEnv, UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
@@ -10,8 +10,9 @@ import AutoImport from "unplugin-auto-import/vite";
 import qiankun from "vite-plugin-qiankun";
 import dayjs from "dayjs";
 import Unocss from "unocss/vite";
+import pkg from "./package.json";
 
-const { dependencies, devDependencies, name, version } = require("./package");
+const { dependencies, devDependencies, name, version } = pkg
 const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version },
   lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
@@ -33,17 +34,19 @@ const getPublicPath = (mode: string) => {
   return base;
 };
 
-
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   console.log('defineConfig', command, mode)
   // 根据当前工作目录中的 `mode` 加载 .env 文件
   // 设置第三个参数为 '' 来加载所有环境变量，而不管是否有 `VITE_` 前缀。
   const env = loadEnv(mode, process.cwd(), '')
   // console.log('env', env)
 
+  const root = process.cwd();
   const config = {
+    root,
     base: mode === "development" ? "/" : getPublicPath(mode),
+    envDir: fileURLToPath(new URL('./env', import.meta.url)),
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__),
       __APP_ENV__: JSON.stringify(env.APP_ENV),
@@ -82,6 +85,7 @@ export default defineConfig(({ command, mode }) => {
       host: "0.0.0.0",
       port: 3000,
       open: true,
+      cors: true,
       proxy: {}
     },
   }

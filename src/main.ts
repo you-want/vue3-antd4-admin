@@ -1,7 +1,7 @@
 import './assets/main.css'
 
 import { createApp, type App  } from 'vue'
-import { createPinia } from 'pinia'
+import pinia from "@/stores";
 
 import app from './App.vue'
 import router from './router'
@@ -19,7 +19,7 @@ function render(props: any = {}) {
   const { container } = props;
   MicroApp = createApp(app);
 
-  MicroApp.use(createPinia())
+  MicroApp.use(pinia)
   MicroApp.use(router)
 
   const c = container
