@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
-import type { GlobalState, ObjToKeyValArray } from "@/stores/interface";
+import type { IAppState, ObjToKeyValArray } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config";
 import piniaPersistConfig from "@/config/piniaPersist";
 
-export const useGlobalStore = defineStore({
+export const useAppStore = defineStore({
   id: "app-config",
   // 修改默认值之后，需清除 localStorage 数据
-  state: (): GlobalState => ({
+  state: (): IAppState => ({
     // 布局模式 (纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns)
     layout: "vertical",
     // 组件大小
@@ -44,8 +44,8 @@ export const useGlobalStore = defineStore({
   }),
   getters: {},
   actions: {
-    // Set GlobalState
-    setGlobalState(...args: ObjToKeyValArray<GlobalState>) {
+    // Set AppState
+    setAppState(...args: ObjToKeyValArray<IAppState>) {
       this.$patch({ [args[0]]: args[1] });
     }
   },

@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import CloudLayout from '@/layouts/CloudLayout.vue'
+import CloudLayout from '@/components/layouts/CloudLayout.vue'
 import { SettingOutlined } from '@ant-design/icons-vue'
 
 /**

@@ -1,43 +1,40 @@
 <script setup lang="ts">
-import { GlobalStore } from '@/stores'
+import { useAppStore } from '@/stores/modules/app'
 import CloudHeader from './components/CloudHeader.vue'
 import CloudAside from './components/CloudAside.vue'
 import CloudFooter from './components/CloudFooter.vue'
 
-const cloudAsideRef = ref<{ collapsed: boolean }>()
-const globalStore = GlobalStore()
-const collapsed = computed(() => globalStore.themeConfig.collapsed)
+const cloudAsideRef = ref<{ isCollapse: boolean }>()
+const AppStore = useAppStore()
+const isCollapse = computed(() => AppStore.isCollapse)
 </script>
 
 <template>
-  <a-layout class="cloud-layout">
+  <layout class="cloud-layout">
     <!-- header -->
     <cloud-header />
-    <a-layout
+    <layout
       class="aside-content"
-      :class="collapsed ? 'aside-close' : 'aside-open'"
+      :class="isCollapse ? 'aside-close' : 'aside-open'"
     >
       <!-- aside 菜单 -->
       <cloud-aside ref="cloudAsideRef" />
-      <a-layout class="content-main">
-        <a-layout-content>
+      <layout class="content-main">
+        <layout-content>
           <!-- 页面 -->
           <router-view />
           <router-view />
           <router-view />
-        </a-layout-content>
+        </layout-content>
         <!-- footer -->
         <cloud-footer />
-      </a-layout>
-    </a-layout>
-  </a-layout>
+      </layout>
+    </layout>
+  </layout>
 </template>
 
 <style scoped lang="less">
 .cloud-layout {
-  width: 100%;
-  height: 100vh;
-  padding-top: 60px;
   .aside-close {
     padding-left: 60px;
     transition: all 0.2s;
@@ -48,6 +45,7 @@ const collapsed = computed(() => globalStore.themeConfig.collapsed)
   }
   .aside-content {
     min-height: calc(100% - 60px);
+    margin-top: 60px;
     display: flex;
     flex-direction: row;
     .content-main {

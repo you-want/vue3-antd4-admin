@@ -1,5 +1,7 @@
 <template>
-  <a-layout-header class="cloud-header">Header</a-layout-header>
+  <layout-header class="cloud-header">
+    Header
+  </layout-header>
 </template>
 
 <style scoped lang="less">

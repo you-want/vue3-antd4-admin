@@ -5,7 +5,7 @@ export type AssemblySizeType = "large" | "default" | "small";
 export type LanguageType = "zh" | "en" | null;
 
 /* GlobalState */
-export interface GlobalState {
+export interface IAppState {
   layout: LayoutType;
   assemblySize: AssemblySizeType;
   language: LanguageType;

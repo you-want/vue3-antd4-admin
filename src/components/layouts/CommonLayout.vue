@@ -4,13 +4,13 @@ import CloudFooter from './components/CloudFooter.vue'
 </script>
 
 <template>
-  <a-layout class="cloud-layout">
+  <layout class="cloud-layout">
     <cloud-header />
-    <a-layout-content class="content-main">
+    <layout-content class="content-main">
       <router-view />
-    </a-layout-content>
+    </layout-content>
     <cloud-footer />
-  </a-layout>
+  </layout>
 </template>
 
 <style scoped lang="less">

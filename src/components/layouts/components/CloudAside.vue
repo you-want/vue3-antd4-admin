@@ -1,32 +1,30 @@
 <script setup lang="ts">
-import SubMenu from '@/layouts/components/SubMenu.vue'
+import ChildMenu from './ChildMenu.vue'
 import { staticRouter } from '@/router/modules/staticRouter'
-import { GlobalStore } from '@/stores'
+import { useAppStore } from '@/stores/modules/app'
 
 const selectedKeys = ref<string[]>([])
 const openKeys = ref<string[]>([])
 const menuList = computed(() => staticRouter)
 
-const globalStore = GlobalStore()
-const themeConfig = computed(() => globalStore.themeConfig)
-const collapsed = computed(() => globalStore.themeConfig.collapsed)
+console.log(11111, menuList)
+
+const AppStore = useAppStore()
+const isCollapse = computed(() => AppStore.isCollapse)
 
 const collapseClick = () => {
-  globalStore.setThemeConfig({
-    ...themeConfig.value,
-    collapsed: !themeConfig.value.collapsed
-  })
+  AppStore.setAppState('isCollapse', isCollapse.value)
 }
 
 defineExpose({
-  collapsed: collapsed
+  isCollapse: isCollapse
 })
 </script>
 
 <template>
-  <a-layout-sider
-    v-model:collapsed="collapsed"
-    :collapsedWidth="60"
+  <layout-sider
+    v-model:isCollapse="isCollapse"
+    :isCollapseWidth="60"
     :width="180"
     collapsible
     theme="dark"
@@ -34,18 +32,18 @@ defineExpose({
     @collapse="collapseClick"
   >
     <!-- logo & name -->
-    <div :class="collapsed ? 'title-close' : 'title-open'" class="title">
+    <div :class="isCollapse ? 'title-close' : 'title-open'" class="title">
       <router-link :to="{ path: '/' }" class="logo-a">
         <span class="ee-logo-wrapper">
           <img
-            :class="collapsed ? 'logo-animate' : ''"
+            :class="isCollapse ? 'logo-animate' : ''"
             src="@/assets/future_cloud_logo1.png"
             width="32px"
             height="32px"
           />
         </span>
         <span
-          :class="collapsed ? 'logo-animate2' : ''"
+          :class="isCollapse ? 'logo-animate2' : ''"
           style="font-size: 16px; font-weight: 700; color: #fff"
         >
           cloud-admin
@@ -53,7 +51,7 @@ defineExpose({
       </router-link>
     </div>
     <!-- 菜单 -->
-    <a-menu
+    <Menu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       :inline-indent="16"
@@ -62,7 +60,7 @@ defineExpose({
     >
       <template v-for="item in menuList" :key="item.name">
         <template v-if="!item.children">
-          <a-menu-item :key="item.name">
+          <menu-item :key="item.name">
             <template #icon>
               <component
                 :is="item.meta?.icon"
@@ -70,17 +68,17 @@ defineExpose({
               ></component>
             </template>
             {{ item.meta?.title }}
-          </a-menu-item>
+          </menu-item>
         </template>
         <template v-else>
-          <SubMenu :key="item.name" :menu-info="item" />
+          <child-menu :key="item.name" :menu-info="item" />
         </template>
       </template>
-    </a-menu>
-  </a-layout-sider>
+    </Menu>
+  </layout-sider>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .CloudAside {
   position: fixed;
   top: 60px;

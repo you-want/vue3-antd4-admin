@@ -1,19 +1,23 @@
 <script setup lang="ts">
 const props = defineProps(['menuInfo'])
+
+console.log(111, 'props', props)
 </script>
 
 <template>
-  <a-sub-menu>
+  <sub-menu>
     <template #icon>
       <component
         :is="menuInfo.meta?.icon"
         style="margin-right: 8px"
       ></component>
     </template>
-    <template #title>{{ menuInfo.meta?.title }}</template>
+    <template #title>
+      {{ menuInfo.meta?.title }}
+    </template>
     <template v-for="item in menuInfo.children" :key="item.name">
       <template v-if="!item.children">
-        <a-menu-item :key="item.name">
+        <menu-item :key="item.name">
           <template #icon>
             <component
               :is="item.meta?.icon"
@@ -21,11 +25,11 @@ const props = defineProps(['menuInfo'])
             ></component>
           </template>
           {{ item.meta?.title }}
-        </a-menu-item>
+        </menu-item>
       </template>
       <template v-else>
-        <sub-menu :menu-info="item" :key="item.name" />
+        <child-menu :menu-info="item" :key="item.name" />
       </template>
     </template>
-  </a-sub-menu>
+  </sub-menu>
 </template>
