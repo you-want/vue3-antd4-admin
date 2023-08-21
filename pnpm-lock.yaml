@@ -49,6 +49,9 @@ devDependencies:
   '@types/node':
     specifier: ^18.17.0
     version: 18.17.5
+  '@types/nprogress':
+    specifier: ^0.2.0
+    version: 0.2.0
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
     version: 4.3.1(vite@4.4.9)(vue@3.3.4)
@@ -947,6 +950,10 @@ packages:
 
   /@types/node@18.17.5:
     resolution: {integrity: sha512-xNbS75FxH6P4UXTPUJp/zNPq6/xsfdJKussCWNOnz4aULWIRwMgP1LgaB5RiBnMX1DPCYenuqGZfnIAx5mbFLA==}
+    dev: true
+
+  /@types/nprogress@0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: true
 
   /@types/semver@7.5.0:

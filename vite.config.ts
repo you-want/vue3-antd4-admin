@@ -55,10 +55,12 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       vue(),
       vueJsx(),
       Components({
-        dirs: [],
+        dirs: ['src/components'],
         extensions: ["vue"],
         include: [/\.vue$/, /\.vue\?vue/],
-        resolvers: [AntDesignVueResolver()],
+        resolvers: [AntDesignVueResolver({
+          importStyle: false, // css in js
+        })],
         dts: "src/types/components.d.ts",
       }),
       AutoImport({
@@ -86,7 +88,13 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       port: 3000,
       open: true,
       cors: true,
-      proxy: {}
+      proxy: {
+        "/api": {
+          target: "http://mlops.tal.com",
+          changeOrigin: true,
+          // rewrite: (path: string) => path.replace(/^\/api/, ""),
+        },
+      }
     },
   }
   return config

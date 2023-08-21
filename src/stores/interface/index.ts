@@ -4,7 +4,6 @@ export type AssemblySizeType = "large" | "default" | "small";
 
 export type LanguageType = "zh" | "en" | null;
 
-/* GlobalState */
 export interface IAppState {
   layout: LayoutType;
   assemblySize: AssemblySizeType;
@@ -28,3 +27,9 @@ export interface IAppState {
 export type ObjToKeyValArray<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T];
+
+export interface IUserState {
+  token: string;
+  userInfo: {[key: string]: unknown};
+  organizations: any[]
+}

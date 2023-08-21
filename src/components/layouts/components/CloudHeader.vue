@@ -1,7 +1,7 @@
 <template>
-  <layout-header class="cloud-header">
+  <a-layout-header class="cloud-header">
     Header
-  </layout-header>
+  </a-layout-header>
 </template>
 
 <style scoped lang="less">

@@ -5,7 +5,7 @@ console.log(111, 'props', props)
 </script>
 
 <template>
-  <sub-menu>
+  <a-sub-menu>
     <template #icon>
       <component
         :is="menuInfo.meta?.icon"
@@ -17,7 +17,7 @@ console.log(111, 'props', props)
     </template>
     <template v-for="item in menuInfo.children" :key="item.name">
       <template v-if="!item.children">
-        <menu-item :key="item.name">
+        <a-menu-item :key="item.name">
           <template #icon>
             <component
               :is="item.meta?.icon"
@@ -25,11 +25,11 @@ console.log(111, 'props', props)
             ></component>
           </template>
           {{ item.meta?.title }}
-        </menu-item>
+        </a-menu-item>
       </template>
       <template v-else>
         <child-menu :menu-info="item" :key="item.name" />
       </template>
     </template>
-  </sub-menu>
+  </a-sub-menu>
 </template>

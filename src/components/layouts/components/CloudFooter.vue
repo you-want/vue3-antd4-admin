@@ -1,11 +1,11 @@
 <template>
-  <layout-footer class="cloud-footer">
+  <a-layout-footer class="cloud-footer">
     <p>————未来云提供计算服务————</p>
     <p>
       Copyright © 2019 -
       {{ new Date().getFullYear() }} 好未来集团基础服务中台出品
     </p>
-  </layout-footer>
+  </a-layout-footer>
 </template>
 
 <style lang="less" scoped>

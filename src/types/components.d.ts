@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ACard: typeof import('ant-design-vue/es')['Card']
     AConfigProvider: typeof import('ant-design-vue/es')['ConfigProvider']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
@@ -15,8 +16,28 @@ declare module 'vue' {
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    ASelect: typeof import('ant-design-vue/es')['Select']
+    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
+    ChildMenu: typeof import('./../components/layouts/components/ChildMenu.vue')['default']
+    CloudAside: typeof import('./../components/layouts/components/CloudAside.vue')['default']
+    CloudFooter: typeof import('./../components/layouts/components/CloudFooter.vue')['default']
+    CloudHeader: typeof import('./../components/layouts/components/CloudHeader.vue')['default']
+    CloudLayout: typeof import('./../components/layouts/CloudLayout.vue')['default']
+    CommonLayout: typeof import('./../components/layouts/CommonLayout.vue')['default']
+    FiveHundred: typeof import('./../components/ErrorMessage/FiveHundred.vue')['default']
+    FourFour: typeof import('./../components/ErrorMessage/FourFour.vue')['default']
+    FourThree: typeof import('./../components/ErrorMessage/FourThree.vue')['default']
+    HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
+    IconCommunity: typeof import('./../components/icons/IconCommunity.vue')['default']
+    IconDocumentation: typeof import('./../components/icons/IconDocumentation.vue')['default']
+    IconEcosystem: typeof import('./../components/icons/IconEcosystem.vue')['default']
+    IconSupport: typeof import('./../components/icons/IconSupport.vue')['default']
+    IconTooling: typeof import('./../components/icons/IconTooling.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TeamSelect: typeof import('./../components/CommonView/TeamSelect.vue')['default']
+    TheWelcome: typeof import('./../components/TheWelcome.vue')['default']
+    WelcomeItem: typeof import('./../components/WelcomeItem.vue')['default']
   }
 }

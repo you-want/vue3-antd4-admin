@@ -1,10 +1,10 @@
 <template>
-  <config-provider
+  <a-config-provider
     :locale="locale"
     :component-size="componentSize"
   >
     <RouterView />
-  </config-provider>
+  </a-config-provider>
 </template>
 
 <script setup lang="ts">

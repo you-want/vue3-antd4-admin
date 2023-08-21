@@ -11,9 +11,11 @@ console.log(11111, menuList)
 
 const AppStore = useAppStore()
 const isCollapse = computed(() => AppStore.isCollapse)
+console.log(222, isCollapse.value)
 
 const collapseClick = () => {
-  AppStore.setAppState('isCollapse', isCollapse.value)
+  console.log(222, isCollapse.value)
+  AppStore.setAppState('isCollapse', !isCollapse.value)
 }
 
 defineExpose({
@@ -22,9 +24,9 @@ defineExpose({
 </script>
 
 <template>
-  <layout-sider
-    v-model:isCollapse="isCollapse"
-    :isCollapseWidth="60"
+  <a-layout-sider
+    v-model:collapsed="isCollapse"
+    :collapsedWidth="60"
     :width="180"
     collapsible
     theme="dark"
@@ -51,7 +53,7 @@ defineExpose({
       </router-link>
     </div>
     <!-- 菜单 -->
-    <Menu
+    <a-menu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       :inline-indent="16"
@@ -60,7 +62,7 @@ defineExpose({
     >
       <template v-for="item in menuList" :key="item.name">
         <template v-if="!item.children">
-          <menu-item :key="item.name">
+          <a-menu-item :key="item.name">
             <template #icon>
               <component
                 :is="item.meta?.icon"
@@ -68,14 +70,14 @@ defineExpose({
               ></component>
             </template>
             {{ item.meta?.title }}
-          </menu-item>
+          </a-menu-item>
         </template>
         <template v-else>
           <child-menu :key="item.name" :menu-info="item" />
         </template>
       </template>
-    </Menu>
-  </layout-sider>
+    </a-menu>
+  </a-layout-sider>
 </template>
 
 <style lang="less" scoped>
