@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { qiankunWindow } from "vite-plugin-qiankun/dist/helper";
+import { qiankunWindow } from 'vite-plugin-qiankun/dist/helper'
 import { staticRouter, errorRouter } from '@/router/modules/staticRouter'
-import NProgress from "@/config/nprogress";
+import NProgress from '@/config/nprogress'
 
 const {
-  pkg: { name },
+  pkg: { name }
 } = __APP_INFO__
 
 /**
@@ -20,15 +20,16 @@ const {
  * @param meta.activeMenu ==> 当前路由为详情页时，需要高亮的菜单
  * @param meta.isLink ==> 路由外链时填写的访问地址
  * @param meta.isHide ==> 是否在菜单中隐藏 (通常列表详情页需要隐藏)
+ * @param meta.isHideChildren ==> 是否只展示父级菜单
  * @param meta.isFull ==> 菜单是否全屏 (示例：数据大屏页面)
  * @param meta.isAffix ==> 菜单是否固定在标签页中 (首页通常是固定项)
  * @param meta.isKeepAlive ==> 当前路由是否缓存
  * */
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
-  // 
+  //
   history: createWebHistory(
-    qiankunWindow.__POWERED_BY_QIANKUN__ ? `/${name}` : "/"
+    qiankunWindow.__POWERED_BY_QIANKUN__ ? `/${name}` : import.meta.env.VITE_ROUTER_BASE_URL || '/'
   ),
   routes: [...staticRouter, ...errorRouter],
   strict: false,
@@ -40,35 +41,34 @@ const router = createRouter({
  * */
 router.beforeEach(async (to, from, next) => {
   // 1.NProgress 开始
-  NProgress.start();
+  NProgress.start()
 
   // 2.动态设置标题
-  const title = import.meta.env.VITE_APP_TITLE;
-  document.title = to.meta.title ? `${to.meta.title} - ${title}` : title;
+  const title = import.meta.env.VITE_APP_TITLE
+  document.title = to.meta.title ? `${to.meta.title} - ${title}` : title
 
   // 3.正常访问页面
-  next();
-});
+  next()
+})
 
 /**
  * @description 重置路由
  * */
-export const resetRouter = () => {
-};
+export const resetRouter = () => {}
 
 /**
  * @description 路由跳转错误
  * */
-router.onError(error => {
-  NProgress.done();
-  console.warn("路由错误", error.message);
-});
+router.onError((error) => {
+  NProgress.done()
+  console.warn('路由错误', error.message)
+})
 
 /**
  * @description 路由跳转结束
  * */
 router.afterEach(() => {
-  NProgress.done();
-});
+  NProgress.done()
+})
 
 export default router

@@ -2,20 +2,38 @@
 import ChildMenu from './ChildMenu.vue'
 import { staticRouter } from '@/router/modules/staticRouter'
 import { useAppStore } from '@/stores/modules/app'
+import { isUrl } from '@/utils/is'
+import type { RouteRecordRaw } from 'vue-router'
 
-const selectedKeys = ref<string[]>([])
-const openKeys = ref<string[]>([])
-const menuList = computed(() => staticRouter)
-
-console.log(11111, menuList)
-
+const router = useRouter()
+const route = useRoute()
 const AppStore = useAppStore()
+
+const theme = computed(() => (AppStore.isDark ? 'dark' : 'light'))
+
+const selectedKeys = ref([route.name as string])
+const openKeys = ref([route.meta.parent as string])
+
+watch(
+  () => route.path,
+  () => {
+    selectedKeys.value = [route.name as string]
+    openKeys.value = [route.meta.parent as string]
+  }
+)
+
+const menuList = computed(() => staticRouter.filter((item) => !item.meta?.isHide))
 const isCollapse = computed(() => AppStore.isCollapse)
-console.log(222, isCollapse.value)
+const menuRef = ref(null)
 
 const collapseClick = () => {
-  console.log(222, isCollapse.value)
   AppStore.setAppState('isCollapse', !isCollapse.value)
+}
+
+const menuItemClick = (item: RouteRecordRaw) => {
+  const path = item.path
+  if (isUrl(path)) return window.open(path)
+  router.push({ path })
 }
 
 defineExpose({
@@ -29,51 +47,49 @@ defineExpose({
     :collapsedWidth="60"
     :width="180"
     collapsible
-    theme="dark"
+    :theme="theme"
     class="CloudAside"
     @collapse="collapseClick"
   >
     <!-- logo & name -->
-    <div :class="isCollapse ? 'title-close' : 'title-open'" class="title">
+    <!-- <div :class="isCollapse ? 'title-close' : 'title-open'" class="title">
       <router-link :to="{ path: '/' }" class="logo-a">
         <span class="ee-logo-wrapper">
           <img
             :class="isCollapse ? 'logo-animate' : ''"
-            src="@/assets/future_cloud_logo1.png"
-            width="32px"
-            height="32px"
+            src="https://static0.xesimg.com/productdata-fileupload/logo/future_cloud_logo1.png"
+            width="26px"
+            height="26px"
           />
         </span>
         <span
           :class="isCollapse ? 'logo-animate2' : ''"
           style="font-size: 16px; font-weight: 700; color: #fff"
         >
-          cloud-admin
+        vue3+antd4
         </span>
       </router-link>
-    </div>
+    </div> -->
     <!-- 菜单 -->
     <a-menu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       :inline-indent="16"
       mode="inline"
-      theme="dark"
+      :theme="theme"
+      ref="menuRef"
     >
       <template v-for="item in menuList" :key="item.name">
-        <template v-if="!item.children">
-          <a-menu-item :key="item.name">
+        <template v-if="!item.children || item.meta?.isHideChildren">
+          <a-menu-item :key="item.name" @click="menuItemClick(item)">
             <template #icon>
-              <component
-                :is="item.meta?.icon"
-                style="margin-right: 8px"
-              ></component>
+              <component :is="item.meta?.icon" style="margin-right: 8px"></component>
             </template>
             {{ item.meta?.title }}
           </a-menu-item>
         </template>
         <template v-else>
-          <child-menu :key="item.name" :menu-info="item" />
+          <child-menu :key="item.name" :menu-info="item" @menuItemClick="menuItemClick" />
         </template>
       </template>
     </a-menu>
@@ -92,6 +108,10 @@ defineExpose({
     bottom: 0;
     left: 7;
   }
+  :deep(.ant-menu-dark) {
+    color: #fff;
+    font-weight: 500;
+  }
 }
 .title {
   color: #fff;
@@ -104,8 +124,8 @@ defineExpose({
   img {
     display: inline-block;
     vertical-align: middle;
-    width: 40px;
-    height: 40px;
+    width: 26px;
+    height: 26px;
   }
 
   span {
@@ -129,7 +149,7 @@ defineExpose({
   overflow: hidden;
 }
 .title-close {
-  padding-left: 8px;
+  padding-left: 16px;
   width: 60px;
   overflow: hidden;
   transition: all 0.2s;

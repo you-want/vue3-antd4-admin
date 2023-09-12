@@ -1,10 +1,10 @@
 {
   "name": "vue3-antd4-admin",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "author": "Rain9",
+  "author": "rain9",
   "type": "module",
-  "description": "vue3-antd4-admin open source management system",
+  "description": "vue3-antd4-admin management system, 是一个基于 Vue3.0、Vite、TypeScript、Ant-Design-Vue 的后台解决方案，为后台管理系统提供现成的开箱解决方案及丰富的示例，提高开发效率。",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -16,13 +16,16 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "build-test": "vite build --mode test",
+    "build-prod": "vite build"
   },
   "dependencies": {
     "@vueuse/core": "^10.3.0",
     "ant-design-vue": "^4.0.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "monaco-editor": "^0.41.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.4",
     "pinia-plugin-persistedstate": "^3.2.0",

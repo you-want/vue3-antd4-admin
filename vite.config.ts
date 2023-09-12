@@ -12,9 +12,9 @@ import dayjs from "dayjs";
 import Unocss from "unocss/vite";
 import pkg from "./package.json";
 
-const { dependencies, devDependencies, name, version } = pkg
+const { dependencies, devDependencies, name, version, description } = pkg
 const __APP_INFO__ = {
-  pkg: { dependencies, devDependencies, name, version },
+  pkg: { dependencies, devDependencies, name, version, description },
   lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
 };
 
@@ -30,17 +30,17 @@ const getPublicPath = (mode: string) => {
       ? "https://xxxxxxx.com/"
       : "https://xxxxxxx.com/";
   const base = `${OssUrl}/${name}/${publicPathMap[mode]}/`;
-  console.log("base", base);
   return base;
+  
+  // 测试环境: vue3-antd4-admin，生产环境:/
+  return mode === "test" ? '/vue3-antd4-admin' : '/'
 };
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
-  console.log('defineConfig', command, mode)
+export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   // 根据当前工作目录中的 `mode` 加载 .env 文件
   // 设置第三个参数为 '' 来加载所有环境变量，而不管是否有 `VITE_` 前缀。
   const env = loadEnv(mode, process.cwd(), '')
-  // console.log('env', env)
 
   const root = process.cwd();
   const config = {
@@ -90,10 +90,10 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       cors: true,
       proxy: {
         "/api": {
-          target: "http://mlops.tal.com",
+          target: "http://xxxxx:32584",
           changeOrigin: true,
           // rewrite: (path: string) => path.replace(/^\/api/, ""),
-        },
+        }
       }
     },
   }

@@ -7,18 +7,13 @@ import CloudFooter from './components/CloudFooter.vue'
 const cloudAsideRef = ref<{ isCollapse: boolean }>()
 const AppStore = useAppStore()
 const isCollapse = computed(() => AppStore.isCollapse)
-
-console.log(isCollapse.value)
 </script>
 
 <template>
   <a-layout class="cloud-layout">
     <!-- header -->
     <cloud-header />
-    <a-layout
-      class="aside-content"
-      :class="isCollapse ? 'aside-close' : 'aside-open'"
-    >
+    <a-layout class="aside-content" :class="isCollapse ? 'aside-close' : 'aside-open'">
       <!-- aside 菜单 -->
       <cloud-aside ref="cloudAsideRef" />
       <a-layout class="content-main">

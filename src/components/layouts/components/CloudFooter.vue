@@ -1,9 +1,9 @@
 <template>
   <a-layout-footer class="cloud-footer">
-    <p>————未来云提供计算服务————</p>
+    <p>————you-want 提供计算服务————</p>
     <p>
       Copyright © 2019 -
-      {{ new Date().getFullYear() }} 好未来集团基础服务中台出品
+      {{ new Date().getFullYear() }} you-want 出品
     </p>
   </a-layout-footer>
 </template>
@@ -20,6 +20,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 999;
   p {
     height: 20px;
     line-height: 20px;

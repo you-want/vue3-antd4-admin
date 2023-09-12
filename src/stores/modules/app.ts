@@ -1,16 +1,16 @@
-import { defineStore } from "pinia";
-import type { IAppState, ObjToKeyValArray } from "@/stores/interface";
-import { DEFAULT_PRIMARY } from "@/config";
-import piniaPersistConfig from "@/config/piniaPersist";
+import { defineStore } from 'pinia'
+import type { IAppState, ObjToKeyValArray } from '@/stores/interface'
+import { DEFAULT_PRIMARY } from '@/config'
+import piniaPersistConfig from '@/config/piniaPersist'
 
 export const useAppStore = defineStore({
-  id: "app-config",
+  id: 'app-config',
   // 修改默认值之后，需清除 localStorage 数据
   state: (): IAppState => ({
     // 布局模式 (纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns)
-    layout: "vertical",
+    layout: 'vertical',
     // 组件大小
-    assemblySize: "default",
+    assemblySize: 'default',
     // 当前系统语言
     language: null,
     // 当前页面是否全屏
@@ -46,8 +46,8 @@ export const useAppStore = defineStore({
   actions: {
     // Set AppState
     setAppState(...args: ObjToKeyValArray<IAppState>) {
-      this.$patch({ [args[0]]: args[1] });
+      this.$patch({ [args[0]]: args[1] })
     }
   },
-  persist: piniaPersistConfig("app-config")
-});
+  persist: piniaPersistConfig('app-config')
+})

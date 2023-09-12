@@ -1,39 +1,34 @@
 import type { RouteRecordRaw } from 'vue-router'
 import CloudLayout from '@/components/layouts/CloudLayout.vue'
-import { SettingOutlined } from '@ant-design/icons-vue'
+import { HomeOutlined } from '@ant-design/icons-vue'
 
 /**
  * staticRouter(静态路由)
  */
 export const staticRouter: RouteRecordRaw[] = [
   {
-    path: '/dev',
-    name: 'dev',
+    path: '/',
+    name: 'about',
     component: CloudLayout,
-    redirect: '/dev/machine',
+    redirect: '/about',
     meta: {
-      icon: SettingOutlined,
-      title: "开发",
+      icon: HomeOutlined,
+      title: '关于',
+      isHideChildren: true,
+      parent: 'about'
     },
     children: [
       {
-        path: "machine",
-        name: "machine",
+        path: '/about',
+        name: 'about',
         meta: {
-          title: "开发机",
+          title: '关于',
+          parent: 'about'
         },
-        component: () => import("@/views/dev/DevMachine.vue"),
-      },
-      {
-        path: "volume",
-        name: "volume",
-        meta: {
-          title: "存储卷",
-        },
-        component: () => import("@/views/dev/DevVolume.vue"),
-      },
+        component: () => import('@/views/about/AboutView.vue')
+      }
     ]
-  },
+  }
 ]
 
 /**

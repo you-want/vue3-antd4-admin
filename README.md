@@ -1,6 +1,6 @@
 # vue3-antd4-admin
 
-这个模板是关于 vue3 + antd4 + vite4
+这个模板是来源于关于 vue3 + antd4 + vite4 + pnpm （vue3-antd4-admin）
 
 ## 相关文档
 
